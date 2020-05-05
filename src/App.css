@@ -1,0 +1,15 @@
+.content-center {
+  height: 35vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.content-center-published-articals {
+  height: 100vh;
+  justify-content: center;
+}
+
+.list-group {
+  width: 90%;
+}
