@@ -2,6 +2,8 @@ import React, { Component, Fragment } from "react";
 import { Row, Col, ListGroup, FormControl } from "react-bootstrap";
 import { connect } from "react-redux";
 import ReactHtmlParser from "react-html-parser";
+import Taskbar from "./Taskbar";
+import ArticleDialogBox from "./ArticleDialogBox";
 
 class PublishedArticles extends Component {
   constructor(props) {
@@ -16,7 +18,7 @@ class PublishedArticles extends Component {
     const { value } = e.target;
     let allArticles = this.props.articles;
     let filterArticles = allArticles.filter(artical => {
-      if (artical.title.toLowerCase().includes(value.toLowerCase())) {
+      if (artical.status && artical.title.toLowerCase().includes(value.toLowerCase())) {
         return artical;
       }
       return null;
@@ -57,18 +59,22 @@ class PublishedArticles extends Component {
               <ListGroup.Item>NO SEARCH RESULT</ListGroup.Item>
             ) : (
               this.props.articles.map(artical => {
-                return (
-                  <ListGroup.Item key={artical.id}>
-                    <b>Title : </b>
-                    {artical.title} <br />
-                    <b>Body : </b>
-                    {ReactHtmlParser(artical.body)}
-                  </ListGroup.Item>
-                );
+                if (artical.status) {
+                  return (
+                    <ListGroup.Item key={artical.id}>
+                      <b>Title : </b>
+                      {artical.title} <br />
+                      <b>Body : </b>
+                      {ReactHtmlParser(artical.body)}
+                    </ListGroup.Item>
+                  );
+                }
               })
             )}
           </ListGroup>
         </Row>
+        <ArticleDialogBox title={"Add Article dialog"} />
+        <Taskbar />
       </Fragment>
     );
   }

@@ -13,20 +13,24 @@ function Taskbar(props) {
       {props.articles ? (
         <CardGroup>
           {props.articles.map(artical => {
-            return (
-              <Card key={artical.id}>
-                <Card.Header className="text-right">
-                  <ArrowsAngleExpand onClick={() => maximiseArticle(artical)} />
-                </Card.Header>
-                <Card.Body>
-                  <Card.Title>{artical.title}</Card.Title>
-                  <Card.Text>{ReactHtmlParser(artical.body)}</Card.Text>
-                </Card.Body>
-                <Card.Footer>
-                  <small className="text-muted"></small>
-                </Card.Footer>
-              </Card>
-            );
+            if (!artical.status) {
+              return (
+                <Card key={artical.id}>
+                  <Card.Header className="text-right">
+                    <ArrowsAngleExpand
+                      onClick={() => maximiseArticle(artical)}
+                    />
+                  </Card.Header>
+                  <Card.Body>
+                    <Card.Title>{artical.title}</Card.Title>
+                    <Card.Text>{ReactHtmlParser(artical.body)}</Card.Text>
+                  </Card.Body>
+                  <Card.Footer>
+                    <small className="text-muted"></small>
+                  </Card.Footer>
+                </Card>
+              );
+            }
           })}
         </CardGroup>
       ) : (

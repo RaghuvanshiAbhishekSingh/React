@@ -29,11 +29,11 @@ class ArticleDialogBox extends Component {
     this.setState({ quillText: value });
   };
 
-  saveData = () => {
+  saveData = (status) => {
     const { quillText, id } = this.state;
     const { value } = this.titleInputRef.current;
     this.setState({ id: "" });
-    this.props.saveData({ id, body: quillText, title: value });
+    this.props.saveData({ id, body: quillText, title: value, status });
   };
 
   onHide = () => {
@@ -72,7 +72,8 @@ class ArticleDialogBox extends Component {
           </Modal.Body>
           <Modal.Footer>
             <Button onClick={this.onHide}>Close</Button>
-            <Button onClick={this.saveData}>Minimize</Button>
+            <Button onClick={() => this.saveData(true)}>Add</Button>
+            <Button onClick={() =>this.saveData(false)}>Minimize</Button>
           </Modal.Footer>
         </Modal>
       </>
